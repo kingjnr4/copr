@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Android Studio Canary
+GenericName=IDE for Android app development
+Comment=Test the newest Android Studio features
+Exec=android-studio-canary %F
+Icon=com.google.AndroidStudio.Canary
+Categories=Development;IDE;Java;
+Keywords=android;kotlin;java;compose;development;ide;canary;
+MimeType=text/plain;inode/directory;
+Terminal=false
+StartupNotify=true
+StartupWMClass=jetbrains-studio-canary

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.google.AndroidStudio.Canary</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <name>Android Studio Canary</name>
+  <summary>Canary channel of the Android development IDE</summary>
+  <developer id="com.google">
+    <name>Android Open Source Project</name>
+  </developer>
+  <launchable type="desktop-id">com.google.AndroidStudio.Canary.desktop</launchable>
+  <description>
+    <p>Android Studio Canary provides early builds of the official Android development environment for testing its newest features.</p>
+  </description>
+  <url type="homepage">https://developer.android.com/studio/preview</url>
+  <url type="bugtracker">https://issuetracker.google.com/components/192708</url>
+  <provides>
+    <binary>android-studio-canary</binary>
+  </provides>
+  <content_rating type="oars-1.1" />
+</component>

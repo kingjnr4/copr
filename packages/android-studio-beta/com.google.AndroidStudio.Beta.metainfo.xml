@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.google.AndroidStudio.Beta</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <name>Android Studio Beta</name>
+  <summary>Beta channel of the Android development IDE</summary>
+  <developer id="com.google">
+    <name>Android Open Source Project</name>
+  </developer>
+  <launchable type="desktop-id">com.google.AndroidStudio.Beta.desktop</launchable>
+  <description>
+    <p>Android Studio Beta provides release candidates and beta builds of the official Android development environment.</p>
+  </description>
+  <url type="homepage">https://developer.android.com/studio/preview</url>
+  <url type="bugtracker">https://issuetracker.google.com/components/192708</url>
+  <provides>
+    <binary>android-studio-beta</binary>
+  </provides>
+  <content_rating type="oars-1.1" />
+</component>

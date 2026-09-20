@@ -1,0 +1,105 @@
+name: Build packages in COPR
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/**"
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package to build
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - android-studio
+          - android-studio-beta
+          - android-studio-canary
+
+permissions:
+  contents: read
+
+concurrency:
+  group: copr-build-${{ github.event.inputs.package || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.detect.outputs.matrix }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect affected packages
+        id: detect
+        env:
+          BEFORE: ${{ github.event.before }}
+          REQUESTED_PACKAGE: ${{ github.event.inputs.package }}
+        run: |
+          set -euo pipefail
+
+          supported=(android-studio android-studio-beta android-studio-canary)
+          selected=()
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "$REQUESTED_PACKAGE" = "all" ]; then
+              selected=("${supported[@]}")
+            else
+              selected=("$REQUESTED_PACKAGE")
+            fi
+          else
+            if [[ "$BEFORE" =~ ^0+$ ]]; then
+              mapfile -t changed < <(git ls-tree -r --name-only "$GITHUB_SHA" -- packages)
+            else
+              mapfile -t changed < <(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- packages)
+            fi
+
+            for package in "${supported[@]}"; do
+              for file in "${changed[@]}"; do
+                if [[ "$file" == "packages/$package/"* ]]; then
+                  selected+=("$package")
+                  break
+                fi
+              done
+            done
+          fi
+
+          matrix=$(jq -cn --args "${selected[@]}" '$ARGS.positional')
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          echo "Selected packages: $matrix"
+
+  build:
+    needs: packages
+    if: needs.packages.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.packages.outputs.matrix) }}
+    steps:
+      - name: Install COPR client
+        run: python3 -m pip install --disable-pip-version-check copr-cli
+
+      - name: Configure COPR authentication
+        env:
+          COPR_CONFIG: ${{ secrets.COPR_CONFIG }}
+        run: |
+          set -euo pipefail
+          install -d -m 0700 "$HOME/.config"
+          umask 077
+          printf '%s\n' "$COPR_CONFIG" > "$HOME/.config/copr"
+
+      - name: Build ${{ matrix.package }}
+        run: copr-cli build-package --name "${{ matrix.package }}" licha/copr
+
+      - name: Remove COPR authentication
+        if: always()
+        run: rm -f "$HOME/.config/copr"

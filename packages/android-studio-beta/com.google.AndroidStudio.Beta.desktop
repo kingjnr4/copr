@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Android Studio Beta
+GenericName=IDE for Android app development
+Comment=Test upcoming Android Studio releases
+Exec=android-studio-beta %F
+Icon=com.google.AndroidStudio.Beta
+Categories=Development;IDE;Java;
+Keywords=android;kotlin;java;compose;development;ide;beta;
+MimeType=text/plain;inode/directory;
+Terminal=false
+StartupNotify=true
+StartupWMClass=jetbrains-studio-beta

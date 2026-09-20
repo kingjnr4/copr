@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Android Studio
+GenericName=IDE for Android app development
+Comment=Develop applications for Android
+Exec=android-studio %F
+Icon=com.google.AndroidStudio
+Categories=Development;IDE;Java;
+Keywords=android;kotlin;java;compose;development;ide;
+MimeType=text/plain;inode/directory;
+Terminal=false
+StartupNotify=true
+StartupWMClass=jetbrains-studio
