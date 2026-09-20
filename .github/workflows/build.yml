@@ -71,7 +71,7 @@ jobs:
             done
           fi
 
-          matrix=$(jq -cn --args "${selected[@]}" '$ARGS.positional')
+          matrix=$(jq -cn '$ARGS.positional' --args "${selected[@]}")
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
           echo "Selected packages: $matrix"
 

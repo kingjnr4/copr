@@ -52,7 +52,7 @@ jobs:
             rpmspec -P "$spec" >/dev/null
           done
 
-          packages_json=$(jq -cn --args "${packages[@]}" '$ARGS.positional | unique')
+          packages_json=$(jq -cn '$ARGS.positional | unique' --args "${packages[@]}")
           echo "changed=true" >> "$GITHUB_OUTPUT"
           echo "packages=$packages_json" >> "$GITHUB_OUTPUT"
 
