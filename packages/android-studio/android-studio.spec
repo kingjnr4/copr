@@ -5,13 +5,13 @@
 %global __jar_repack %{nil}
 %define __brp_check_rpaths %{nil}
 
-%global archive_id quail4-patch1
+%global archive_id rabbit1
 %global app_id com.google.AndroidStudio
 %global __requires_exclude_from ^%{_libexecdir}/%{name}/.*$
 %global __provides_exclude_from ^%{_libexecdir}/%{name}/.*$
 
 Name:           android-studio
-Version:        2026.1.4.8
+Version:        2026.2.1.8
 Release:        1%{?dist}
 Summary:        Official IDE for Android application development
 License:        LicenseRef-Proprietary

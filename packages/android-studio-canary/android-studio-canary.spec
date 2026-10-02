@@ -5,13 +5,13 @@
 %global __jar_repack %{nil}
 %define __brp_check_rpaths %{nil}
 
-%global archive_id rabbit2-canary2
+%global archive_id rabbit2-canary3
 %global app_id com.google.AndroidStudio.Canary
 %global __requires_exclude_from ^%{_libexecdir}/%{name}/.*$
 %global __provides_exclude_from ^%{_libexecdir}/%{name}/.*$
 
 Name:           android-studio-canary
-Version:        2026.2.2.2
+Version:        2026.2.2.3
 Release:        1%{?dist}
 Summary:        Canary channel of the official Android development IDE
 License:        LicenseRef-Proprietary
