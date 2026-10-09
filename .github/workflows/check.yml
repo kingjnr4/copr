@@ -19,7 +19,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes appstream desktop-file-utils rpm
 
-      - name: Test release updater
+      - name: Test release updaters and build selection
         run: python3 -m unittest discover -v
 
       - name: Parse RPM specs
@@ -28,6 +28,7 @@ jobs:
           for spec in packages/*/*.spec; do
             rpmspec -P "$spec" >/dev/null
           done
+          rpmspec --target aarch64 -P packages/intellij-idea/intellij-idea.spec >/dev/null
 
       - name: Validate desktop files
         run: desktop-file-validate packages/*/*.desktop

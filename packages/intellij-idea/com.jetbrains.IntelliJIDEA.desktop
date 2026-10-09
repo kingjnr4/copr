@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=IntelliJ IDEA (Open Source)
+GenericName=Java and Kotlin IDE
+Comment=Develop Java and Kotlin applications
+Exec=intellij-idea %F
+Icon=com.jetbrains.IntelliJIDEA
+Categories=Development;IDE;Java;
+Keywords=java;kotlin;intellij;development;ide;
+MimeType=text/plain;inode/directory;
+Terminal=false
+StartupNotify=true
+StartupWMClass=jetbrains-idea

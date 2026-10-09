@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.jetbrains.IntelliJIDEA</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <name>IntelliJ IDEA (Open Source)</name>
+  <summary>IDE for Java and Kotlin development</summary>
+  <developer id="com.jetbrains">
+    <name>JetBrains</name>
+  </developer>
+  <launchable type="desktop-id">com.jetbrains.IntelliJIDEA.desktop</launchable>
+  <description>
+    <p>IntelliJ IDEA is an integrated development environment for Java and Kotlin. This package contains JetBrains' official open-source build and bundled runtime, without the proprietary Ultimate features.</p>
+    <p>Install a separate development JDK matching your project's requirements to compile and run Java applications.</p>
+  </description>
+  <url type="homepage">https://www.jetbrains.com/idea/</url>
+  <url type="bugtracker">https://youtrack.jetbrains.com/issues/IDEA</url>
+  <provides>
+    <binary>intellij-idea</binary>
+  </provides>
+  <content_rating type="oars-1.1" />
+</component>

@@ -14,6 +14,10 @@ else
         fedora-44-x86_64
         fedora-45-x86_64
         fedora-rawhide-x86_64
+        fedora-43-aarch64
+        fedora-44-aarch64
+        fedora-45-aarch64
+        fedora-rawhide-aarch64
     )
 fi
 
@@ -32,7 +36,7 @@ for chroot in "${chroots[@]}"; do
     project_args+=(--chroot "$chroot")
 done
 
-description='Focused Fedora packages for Android Studio stable, beta, and canary.'
+description='Focused Fedora packages for Android Studio stable, beta, and canary, and IntelliJ IDEA open-source builds.'
 instructions="Enable with: sudo dnf copr enable $project"
 
 if copr-cli get "$project" >/dev/null 2>&1; then
@@ -47,7 +51,7 @@ else
         --instructions "$instructions"
 fi
 
-packages=(android-studio android-studio-beta android-studio-canary)
+packages=(android-studio android-studio-beta android-studio-canary intellij-idea)
 for package in "${packages[@]}"; do
     package_args=(
         "$project"

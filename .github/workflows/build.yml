@@ -18,6 +18,7 @@ on:
           - android-studio
           - android-studio-beta
           - android-studio-canary
+          - intellij-idea
 
 permissions:
   contents: read
@@ -45,7 +46,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          supported=(android-studio android-studio-beta android-studio-canary)
+          supported=(android-studio android-studio-beta android-studio-canary intellij-idea)
           selected=()
 
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -85,6 +86,11 @@ jobs:
       matrix:
         package: ${{ fromJSON(needs.packages.outputs.matrix) }}
     steps:
+      - name: Check out build helper
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
       - name: Install COPR client
         run: python3 -m pip install --disable-pip-version-check copr-cli
 
@@ -98,7 +104,9 @@ jobs:
           printf '%s\n' "$COPR_CONFIG" > "$HOME/.config/copr"
 
       - name: Build ${{ matrix.package }}
-        run: copr-cli build-package --name "${{ matrix.package }}" licha/copr
+        env:
+          PACKAGE: ${{ matrix.package }}
+        run: python3 scripts/build_copr.py "$PACKAGE"
 
       - name: Remove COPR authentication
         if: always()
