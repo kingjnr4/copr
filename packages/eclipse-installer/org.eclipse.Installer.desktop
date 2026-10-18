@@ -9,4 +9,5 @@ Categories=Development;IDE;Java;
 Keywords=eclipse;oomph;java;installer;development;
 Terminal=false
 StartupNotify=true
-StartupWMClass=Eclipse Installer
+# SWT uses a non-breaking space (U+00A0) in its Wayland app ID.
+StartupWMClass=Eclipse Installer

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import configparser
 import hashlib
 import io
 import re
@@ -13,6 +14,17 @@ from pathlib import Path
 
 
 PACKAGE = Path(__file__).resolve().parent.parent / "packages/eclipse-installer"
+
+
+class EclipseDesktopTests(unittest.TestCase):
+    def test_startup_class_matches_swt_wayland_app_id(self) -> None:
+        desktop = configparser.ConfigParser(interpolation=None)
+        desktop.read(PACKAGE / "org.eclipse.Installer.desktop", encoding="utf-8")
+        entry = desktop["Desktop Entry"]
+        # This is U+00A0, not the ordinary space used in the visible menu label.
+        self.assertEqual(entry["StartupWMClass"], "Eclipse\u00a0Installer")
+        self.assertEqual(entry["Name"], "Eclipse Installer")
+        self.assertEqual(entry["Icon"], "org.eclipse.Installer")
 
 
 @unittest.skipUnless(shutil.which("rpmbuild"), "rpmbuild is required")

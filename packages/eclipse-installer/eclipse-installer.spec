@@ -14,7 +14,7 @@
 
 Name:           eclipse-installer
 Version:        2026.09
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Install Eclipse IDE packages using the official Eclipse Installer
 License:        EPL-2.0 AND GPL-2.0-only WITH Classpath-exception-2.0
 URL:            https://www.eclipse.org/downloads/
@@ -118,5 +118,8 @@ appstreamcli validate --no-net \
 %{_metainfodir}/%{app_id}.metainfo.xml
 
 %changelog
+* Mon Oct 19 2026 licha <licha@users.noreply.github.com> - 2026.09-2
+- Match the SWT Wayland app ID so Plasma uses the installer icon
+
 * Mon Oct 19 2026 licha <licha@users.noreply.github.com> - 2026.09-1
 - Package the official Eclipse Installer for x86_64 and aarch64
