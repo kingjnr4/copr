@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.eclipse.Installer</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>EPL-2.0</project_license>
+  <name>Eclipse Installer</name>
+  <summary>Choose and install Eclipse IDE packages</summary>
+  <developer id="org.eclipse">
+    <name>Eclipse Foundation</name>
+  </developer>
+  <launchable type="desktop-id">org.eclipse.Installer.desktop</launchable>
+  <description>
+    <p>The official Eclipse Installer (Oomph) helps you choose and install Eclipse IDE packages for Java, C/C++, and other development tools.</p>
+    <p>The installer includes a Java runtime. Run it as a normal user and select an installation folder in your home directory. Installed IDEs and workspaces are managed separately from this package.</p>
+  </description>
+  <url type="homepage">https://www.eclipse.org/downloads/</url>
+  <url type="bugtracker">https://github.com/eclipse-oomph/oomph/issues</url>
+  <provides>
+    <binary>eclipse-installer</binary>
+  </provides>
+  <content_rating type="oars-1.1" />
+</component>

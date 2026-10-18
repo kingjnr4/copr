@@ -1,0 +1,63 @@
+name: Update Eclipse Installer releases
+
+on:
+  schedule:
+    - cron: "53 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: update-ide-releases
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install RPM tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes rpm
+
+      - name: Test release updaters and build selection
+        run: python3 -m unittest discover -v
+
+      - name: Discover current Eclipse Installer release
+        run: python3 scripts/update_eclipse_installer.py
+
+      - name: Validate changes
+        id: changes
+        run: |
+          set -euo pipefail
+          git diff --check
+          spec=packages/eclipse-installer/eclipse-installer.spec
+          if git diff --quiet -- "$spec"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          rpmspec --target x86_64 -P "$spec" >/dev/null
+          rpmspec --target aarch64 -P "$spec" >/dev/null
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit updates
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add packages/eclipse-installer/eclipse-installer.spec
+          git commit -m "chore: update Eclipse Installer release"
+          git push
+
+      - name: Request COPR builds
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build.yml --ref main -f package=eclipse-installer

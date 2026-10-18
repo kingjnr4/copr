@@ -29,6 +29,7 @@ jobs:
             rpmspec -P "$spec" >/dev/null
           done
           rpmspec --target aarch64 -P packages/intellij-idea/intellij-idea.spec >/dev/null
+          rpmspec --target aarch64 -P packages/eclipse-installer/eclipse-installer.spec >/dev/null
 
       - name: Validate desktop files
         run: desktop-file-validate packages/*/*.desktop

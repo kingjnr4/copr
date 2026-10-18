@@ -36,7 +36,7 @@ for chroot in "${chroots[@]}"; do
     project_args+=(--chroot "$chroot")
 done
 
-description='Focused Fedora packages for Android Studio stable, beta, and canary, and IntelliJ IDEA open-source builds.'
+description='Fedora packages for Android Studio stable, beta, and canary, IntelliJ IDEA open-source builds, and Eclipse Installer.'
 instructions="Enable with: sudo dnf copr enable $project"
 
 if copr-cli get "$project" >/dev/null 2>&1; then
@@ -51,7 +51,7 @@ else
         --instructions "$instructions"
 fi
 
-packages=(android-studio android-studio-beta android-studio-canary intellij-idea)
+packages=(android-studio android-studio-beta android-studio-canary intellij-idea eclipse-installer)
 for package in "${packages[@]}"; do
     package_args=(
         "$project"

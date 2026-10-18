@@ -23,6 +23,12 @@ class SelectChrootsTests(unittest.TestCase):
     def test_intellij_selects_both_supported_architectures(self) -> None:
         self.assertEqual(select_chroots("intellij-idea", self.CHROOTS), sorted(self.CHROOTS[:6]))
 
+    def test_eclipse_selects_both_supported_architectures(self) -> None:
+        self.assertEqual(select_chroots("eclipse-installer", self.CHROOTS), sorted(self.CHROOTS[:6]))
+        for arch in ("x86_64", "aarch64"):
+            with self.subTest(arch=arch), self.assertRaisesRegex(ValueError, "requires an enabled"):
+                select_chroots("eclipse-installer", [f"fedora-44-{arch}"])
+
     def test_rejects_missing_required_architecture(self) -> None:
         with self.assertRaisesRegex(ValueError, "aarch64"):
             select_chroots("intellij-idea", ["fedora-44-x86_64"])

@@ -9,7 +9,7 @@ permissions:
   actions: write
   contents: write
 
-# Both updaters push to main; serialize their commits to avoid push races.
+# Release updaters push to main; serialize their commits to avoid push races.
 concurrency:
   group: update-ide-releases
   cancel-in-progress: false

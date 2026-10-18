@@ -13,6 +13,7 @@ PACKAGE_ARCHITECTURES = {
     "android-studio-beta": ("x86_64",),
     "android-studio-canary": ("x86_64",),
     "intellij-idea": ("x86_64", "aarch64"),
+    "eclipse-installer": ("x86_64", "aarch64"),
 }
 
 

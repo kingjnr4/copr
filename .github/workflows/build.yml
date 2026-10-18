@@ -19,6 +19,7 @@ on:
           - android-studio-beta
           - android-studio-canary
           - intellij-idea
+          - eclipse-installer
 
 permissions:
   contents: read
@@ -46,7 +47,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          supported=(android-studio android-studio-beta android-studio-canary intellij-idea)
+          supported=(android-studio android-studio-beta android-studio-canary intellij-idea eclipse-installer)
           selected=()
 
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then

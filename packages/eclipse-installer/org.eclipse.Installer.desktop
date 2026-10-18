@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Eclipse Installer
+GenericName=Eclipse IDE Installer
+Comment=Choose and install Eclipse IDE packages
+Exec=eclipse-installer
+Icon=org.eclipse.Installer
+Categories=Development;IDE;Java;
+Keywords=eclipse;oomph;java;installer;development;
+Terminal=false
+StartupNotify=true
+StartupWMClass=Eclipse Installer

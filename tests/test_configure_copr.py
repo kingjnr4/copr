@@ -26,7 +26,7 @@ class ConfigureCoprTests(unittest.TestCase):
             subprocess.run(["bash", str(SCRIPT), *args], env=env, check=True, capture_output=True)
             return [line.split() for line in log.read_text(encoding="utf-8").splitlines()]
 
-    def test_defaults_enable_both_architectures_and_register_intellij(self) -> None:
+    def test_defaults_enable_both_architectures_and_register_packages(self) -> None:
         calls = self.run_helper()
         modify = next(call for call in calls if call[0] == "modify")
         chroots = [modify[index + 1] for index, value in enumerate(modify) if value == "--chroot"]
@@ -36,11 +36,15 @@ class ConfigureCoprTests(unittest.TestCase):
             for arch in ("x86_64", "aarch64")
         })
         packages = [call for call in calls if call[0] == "edit-package-scm"]
-        self.assertEqual(len(packages), 4)
+        self.assertEqual(len(packages), 5)
         idea = next(call for call in packages if "intellij-idea" in call)
         self.assertIn("packages/intellij-idea", idea)
         self.assertIn("intellij-idea.spec", idea)
         self.assertEqual(idea[idea.index("--webhook-rebuild") + 1], "off")
+        eclipse = next(call for call in packages if "eclipse-installer" in call)
+        self.assertIn("packages/eclipse-installer", eclipse)
+        self.assertIn("eclipse-installer.spec", eclipse)
+        self.assertEqual(eclipse[eclipse.index("--webhook-rebuild") + 1], "off")
 
     def test_custom_chroots_are_preserved(self) -> None:
         calls = self.run_helper(
