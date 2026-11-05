@@ -5,14 +5,14 @@
 %global __jar_repack %{nil}
 %define __brp_check_rpaths %{nil}
 
-%global sha256_x86_64 b890324a12f3cb67fed4d492c1fc1a6c6e81f27b5e4e418b69daa62e4d12c680
-%global sha256_aarch64 a2ef14d590798cfcd11514fd8586338a11eba49ce3209fee1421ec2686359aa7
+%global sha256_x86_64 c9eb3aacbe1467f2bfaf5de85c3f340dd68ba967931cb200dc98cdc1be824fe3
+%global sha256_aarch64 d5f157267b4e60c3c335d2e518e0eb5eaa195ef8de7da7f14ecc8211393c9542
 %global app_id com.jetbrains.IntelliJIDEA
 %global __requires_exclude_from ^%{_libexecdir}/%{name}/.*$
 %global __provides_exclude_from ^%{_libexecdir}/%{name}/.*$
 
 Name:           intellij-idea
-Version:        2026.2.4
+Version:        2026.3
 Release:        1%{?dist}
 Summary:        Open-source IDE for Java and Kotlin development
 License:        Apache-2.0 AND GPL-2.0-only WITH Classpath-exception-2.0
