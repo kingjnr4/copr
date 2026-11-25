@@ -5,13 +5,13 @@
 %global __jar_repack %{nil}
 %define __brp_check_rpaths %{nil}
 
-%global archive_id rabbit3-rc1
+%global archive_id rabbit3-rc2
 %global app_id com.google.AndroidStudio.Beta
 %global __requires_exclude_from ^%{_libexecdir}/%{name}/.*$
 %global __provides_exclude_from ^%{_libexecdir}/%{name}/.*$
 
 Name:           android-studio-beta
-Version:        2026.2.3.4
+Version:        2026.2.3.5
 Release:        1%{?dist}
 Summary:        Beta channel of the official Android development IDE
 License:        LicenseRef-Proprietary
